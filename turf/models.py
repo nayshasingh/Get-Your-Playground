@@ -1,8 +1,5 @@
 from django.db import models
-
-# Create your models here.
-from django.contrib.postgres.fields import ArrayField
-from django.db.models.fields import AutoField
+from datetime import date
 # Create your models here.
 
 class Contact(models.Model):
@@ -15,46 +12,18 @@ class Contact(models.Model):
         return self.yourName
 
 
+# Updated TurfBooked model for tracking bookings for a specific date and slot
 
-class turfBooking(models.Model):
-    time_slot = models.CharField(max_length=12)
-    isBooked = models.BooleanField(default=False)
-    days = models.CharField(max_length=100, blank=True)
-
-    def __str__(self):
-        return self.time_slot
-
-
-class bookslot(models.Model):
-    week = ArrayField(
-        ArrayField(
-            models.IntegerField(default=0),
-            size=20,
-        ),
-        size=7,
-    )
-    
-class Time(models.Model):
-    name = models.CharField(max_length=200, default="")
-    week = ArrayField(
-        ArrayField(
-            models.IntegerField(default=0),
-            size=20,
-        ),
-        size=7,
-    )
 
 class TurfBooked(models.Model):
     name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     amount = models.IntegerField()
-    selected_date = models.CharField(max_length=200)
-    current_date = models.CharField(max_length=200)
-    booking_time = models.CharField(max_length=200, default="")
-    slots = ArrayField(
-        models.CharField(max_length=200, default=""),
-        size=20,
-    )
+    selected_date = models.DateField()  # Changed to DateField for better date handling
+    booking_date = models.DateField(default=date.today)  # Default set to today's date
+    booking_time = models.CharField(max_length=200, default="")  # Time of the booking (e.g., "10:00 AM")
+    slots = models.JSONField(default=list)  # Storing booked slots as a list of slot identifiers or times
+
     
-    # payment_id = models.CharField(max_length=100)
-    # paid = models.BooleanField(default=False)
+    def __str__(self):
+        return f"{self.name} - {self.selected_date} - {self.booking_time}"

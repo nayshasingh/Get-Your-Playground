@@ -7,6 +7,4 @@ from .models import *
 
 
 admin.site.register(Contact)
-admin.site.register(turfBooking)
 admin.site.register(TurfBooked)
-admin.site.register(bookslot)

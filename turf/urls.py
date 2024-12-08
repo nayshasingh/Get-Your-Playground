@@ -14,6 +14,6 @@ urlpatterns = [
     path('turfBilling', views.turfBilling, name='turfBilling'),
     path('orderHistory', views.orderHistory, name="orderHistory"),
     path('allBookings', views.allBookings, name="allBookings"),
-    path('delete_booking/<int:id>', views.delete_booking, name="delete_booking"),
+    path('delete_booking/<int:id>/', views.delete_booking, name='delete_booking'),
     path('success', views.success, name='success')
 ]

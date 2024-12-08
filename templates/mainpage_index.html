@@ -1,256 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/css/mainpage_style.css" />
-    <link rel="shortcut icon" type="image/jpg" href="../static/images/favicon.ico"/>
-    <meta name="title" property="og:title" content="SurfTheTurf"/>
-    <meta name="type" property="og:type" content="website"/>
-    <meta name="url" property="og:url" content="https://surftheturf.herokuapp.com/"/>
-    <meta name="image" property="og:image" content="https://raw.githubusercontent.com/parthd06/SurfTheTurf/main/Extras/Screenshots/surftheturfbanner.png">
-    <title>SurfTheTurf -Find nearby Turfs</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Poppins", sans-serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../static/css/mainpage_style.css" />
+  <link rel="shortcut icon" type="image/jpg" href="../static/images/favicon.ico" />
+  <meta name="title" property="og:title" content="SurfTheTurf" />
+  <meta name="type" property="og:type" content="website" />
+  <meta name="url" property="og:url" content="https://surftheturf.herokuapp.com/" />
+  <meta name="image" property="og:image"
+    content="https://raw.githubusercontent.com/parthd06/SurfTheTurf/main/Extras/Screenshots/surftheturfbanner.png" />
+  <title>TurfFinder</title>
+</head>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
-      .showcase {
-        position: absolute;
-        right: 0;
-        width: 100%;
-        min-height: 100vh;
-        padding: 100px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: #111;
-        color: #fff;
-        z-index: 2;
-        transition: 0.5s;
-      }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+  }
 
-      .showcase.active {
-        right: 300px;
-      }
+  .showcase {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    color: #fff;
+    z-index: 2;
+    transition: 0.5s;
+  }
 
-      .showcase header {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 40px 100px;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
+  .showcase.active {
+    right: 300px;
+  }
 
-      .logo {
-        text-transform: uppercase;
-        cursor: pointer;
-      }
+  .showcase header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-      .toggle {
-        position: relative;
-        width: 60px;
-        height: 60px;
-        background: url("../static/images/menu.png");
-        background-repeat: no-repeat;
-        background-size: 30px;
-        background-position: center;
-        cursor: pointer;
-      }
+  .logo {
+    text-transform: uppercase;
+    cursor: pointer;
+  }
 
-      .toggle.active {
-        background: url("../static/images/close.png");
-        background-repeat: no-repeat;
-        background-size: 25px;
-        background-position: center;
-      }
+  .toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background: url("../static/images/menu.png");
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position: center;
+    cursor: pointer;
+  }
 
-      .showcase video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.8;
-      }
+  .toggle.active {
+    background: url("../static/images/close.png");
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: center;
+  }
 
-      .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #4f4c4d;
-        mix-blend-mode: overlay;
-      }
+  .showcase video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+  }
 
-      .text {
-        position: relative;
-        z-index: 10;
-      }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #4f4c4d;
+    mix-blend-mode: overlay;
+  }
 
-      .text h2 {
-        font-size: 5em;
-        font-weight: 800;
-        line-height: 1em;
-        text-transform: uppercase;
-      }
+  .text {
+    position: relative;
+    z-index: 10;
+  }
 
-      .text h3 {
-        font-size: 4em;
-        font-weight: 700;
-        line-height: 1em;
-        text-transform: uppercase;
-      }
+  .text h2 {
+    font-size: 5em;
+    font-weight: 800;
+    line-height: 1em;
+    text-transform: uppercase;
+  }
 
-      .text p {
-        font-size: 1.1em;
-        margin: 20px 0;
-        font-weight: 400;
-        max-width: 700px;
-      }
+  .text h3 {
+    font-size: 4em;
+    font-weight: 700;
+    line-height: 1em;
+    text-transform: uppercase;
+  }
 
-      .text a {
-        display: inline-block;
-        font-size: 1em;
-        background: #fff;
-        padding: 10px 30px;
-        text-decoration: none;
-        color: #111;
-        margin-top: 10px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        transition: 0.2s;
-      }
+  .text p {
+    font-size: 1.1em;
+    margin: 20px 0;
+    font-weight: 400;
+    max-width: 700px;
+  }
 
-      .text a:hover {
-        letter-spacing: 6px;
-      }
+  .text a {
+    display: inline-block;
+    font-size: 1em;
+    background: #fff;
+    padding: 10px 30px;
+    text-decoration: none;
+    color: #111;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.2s;
+  }
 
-      .social {
-        position: absolute;
-        bottom: 20px;
-        z-index: 10;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+  .text a:hover {
+    letter-spacing: 6px;
+  }
 
-      .social li {
-        list-style: none;
-      }
+  .social {
+    position: absolute;
+    bottom: 20px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-      .social li a {
-        display: inline-block;
-        margin-right: 20px;
-        transform: scale(0.5);
-        transition: 0.5s;
-      }
+  .social li {
+    list-style: none;
+  }
 
-      .social li a:hover {
-        transform: scale(0.5) translateY(-15px);
-      }
+  .social li a {
+    display: inline-block;
+    margin-right: 20px;
+    transform: scale(0.5);
+    transition: 0.5s;
+  }
 
-      .menu {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 300px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+  .social li a:hover {
+    transform: scale(0.5) translateY(-15px);
+  }
 
-      .menu ul {
-        position: relative;
-        list-style: none;
-      }
+  .menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-      .menu ul li a {
-        text-decoration: none;
-        font-size: 24px;
-        color: #111;
-      }
+  .menu ul {
+    position: relative;
+    list-style: none;
+  }
 
-      .menu ul li a:hover {
-        color: #03a9f4;
-      }
-      @media (max-width: 798px) {
-        .showcase,
-        .showcase header {
-          padding: 40px;
-        }
+  .menu ul li a {
+    text-decoration: none;
+    font-size: 24px;
+    color: #111;
+  }
 
-        .text h2 {
-          font-size: 3em;
-        }
+  .menu ul li a:hover {
+    color: #03a9f4;
+  }
 
-        .text h3 {
-          font-size: 2em;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <section class="showcase">
-      <header>
-        <h2 class="logo">SurfTheTurf</h2>
-        <div class="toggle"></div>
-      </header>
+  @media (max-width: 798px) {
 
-      <video src="../static/images/video.mp4" muted loop autoplay></video>
-      <!-- <iframe src="../static/images" muted loop autoplay frameborder="0"></iframe> -->
-      <div class="overlay"></div>
+    .showcase,
+    .showcase header {
+      padding: 40px;
+    }
 
-      <div class="text">
-        <h2>Never Stop</h2>
-        <h3>Be Limitless</h3>
-        <p>Book your nearby Turfs with just a Tap.</p>
-        <a href="book_now">Explore</a>
-      </div>
+    .text h2 {
+      font-size: 3em;
+    }
 
-      <ul class="social">
-        <li>
-          <a href="#"><img src="../static/images/facebook.png" alt="" /></a>
-        </li>
-        <li>
-          <a href="#"><img src="../static/images/instagram.png" alt="" /></a>
-        </li>
-        <li>
-          <a href="#"><img src="../static/images/twitter.png" alt="" /></a>
-        </li>
-      </ul>
-    </section>
+    .text h3 {
+      font-size: 2em;
+    }
+  }
+</style>
 
-    <div class="menu">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="book_now">Book Now</a></li>
-        <li><a href="aboutus">About Us</a></li>
-        <li><a href="contactus">Contact Us</a></li>
-        {% if user.is_authenticated %}
-        <li class="nav-item nav-link">Hello, {{username}}</li>
-        <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
-        {% else %}
-        <li class="nav-item"><a class="nav-link" href="signup">SignUp</a></li>
-        <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
-        {% endif %}
-        
-      </ul>
+<body>
+  <!-- Hero Section -->
+  <section class="showcase">
+    <!-- Header Section -->
+    <header>
+      <h1 class="logo">TurfFinder</h1>
+      <div class="toggle" aria-label="Toggle Menu"></div>
+    </header>
+
+    <!-- Background Video -->
+    <video src="../static/images/video.mp4" muted loop autoplay playsinline></video>
+    <div class="overlay"></div>
+
+    <!-- Text Content -->
+    <div class="text">
+      <h2>Discover & Play</h2>
+      <h3>Your Game, Your Way</h3>
+      <p>Effortlessly book turfs near you and stay active. Play like a champion!</p>
+      <a href="book_now" class="btn-primary">Book Now</a>
     </div>
 
-    <script src="../static/js/mainpage.js"></script>
-  </body>
+    <!-- Social Media Icons -->
+    <ul class="social">
+      <li><a href="#" aria-label="Facebook"><img src="../static/images/facebook.png" alt="Facebook" /></a></li>
+      <li><a href="#" aria-label="Instagram"><img src="../static/images/instagram.png" alt="Instagram" /></a></li>
+      <li><a href="#" aria-label="Twitter"><img src="../static/images/twitter.png" alt="Twitter" /></a></li>
+    </ul>
+  </section>
+
+  <!-- Sidebar Menu -->
+  <nav class="menu">
+    <ul>
+      <li><a href="/">🏠 Home</a></li>
+      <li><a href="book_now">📅 Book Now</a></li>
+      <li><a href="aboutus">ℹ️ About Us</a></li>
+      <li><a href="contactus">📞 Contact Us</a></li>
+
+      {% if user.is_authenticated %}
+      <li><span>👋 Hello, {{ username }}</span></li>
+      <li><a href="logout">🚪 Logout</a></li>
+      {% else %}
+      <li><a href="signup">📝 Sign Up</a></li>
+      <li><a href="login">🔐 Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <!-- JavaScript -->
+  <script src="../static/js/mainpage.js"></script>
+</body>
+
 </html>
